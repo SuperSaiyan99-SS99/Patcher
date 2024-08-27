@@ -101,7 +101,7 @@ public class ArmorStatusRenderer {
                         //#else
                         //$$ Enchantments.PROTECTION,
                         //#endif
-                        stack));
+                        stack), false);
                 }
 
                 if (getProj && stack.isItemEnchanted()) {
@@ -111,7 +111,7 @@ public class ArmorStatusRenderer {
                         //#else
                         //$$ Enchantments.PROJECTILE_PROTECTION,
                         //#endif
-                        stack));
+                        stack), true);
                 }
             }
         }
@@ -121,9 +121,9 @@ public class ArmorStatusRenderer {
         return roundDouble(avgDef * 100.0);
     }
 
-    private int getEffProtPoints(int level) {
+    private int getEffProtPoints(int level, boolean getProj) {
         if (level != 0) {
-            return (int) Math.floor((6 + level * level) * 0.75 / 3.0);
+            return (int) Math.floor((6 + level * level) * (!getProj ? 0.75 : 1.5) / 3.0);
         } else {
             return 0;
         }
